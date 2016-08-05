@@ -31,6 +31,7 @@ class Router
 		if (!in_array($_SERVER['REQUEST_METHOD'], $this->methods[$this->path])) {
 			throw new MethodNotAllowedException;
 		}
+		
 		return $this->routes[$this->path];
 	}
 }

@@ -28,9 +28,7 @@ $container['db'] = function($c) {
 		$c->config['db_pass']);
 };
 
-$app->get('/', function() {
-	echo 'Home';
-});
+$app->get('/', [App\Controllers\HomeController::class, 'index']);
 
 $app->post('/signup', function() {
 	echo 'Sign up';
