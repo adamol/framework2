@@ -26,11 +26,12 @@ $container['db'] = function($c) {
 	return new PDO(
 		$c->config['db_driver'].':host='.$c->config['db_host'].';dbname='.$c->config['db_name'],
 		$c->config['db_user'],
-		$c->config['db_pass']);
+		$c->config['db_pass']
+	);
 };
 
 $app->get('/', [App\Controllers\HomeController::class, 'index']);
-$app->get('/users', [App\Controllers\UserController::class, 'index']);
+$app->get('/users', [new App\Controllers\UserController($container->db), 'index']);
 
 $app->post('/signup', function() {
 	echo 'Sign up';
