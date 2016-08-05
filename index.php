@@ -6,6 +6,11 @@ $app = new App\App;
 
 $container = $app->getContainer();
 
+$container['errorHandler'] = function() {
+	// TODO
+	die('Route not found');
+};
+
 $container['config'] = function() {
 	return [
 	'db_driver' => 'mysql',
