@@ -27,4 +27,12 @@ $app->get('/', function() {
 	echo 'Home';
 });
 
+$app->post('/signup', function() {
+	echo 'Sign up';
+});
+
+$app->map('/users', function() {
+	echo 'Users';
+}, ['GET', 'POST']);
+
 $app->run();

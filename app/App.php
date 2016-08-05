@@ -19,4 +19,36 @@ class App
 	{
 		return $this->container;
 	}
+
+	public function get($uri, $handler)
+	{
+		$this->container->router->addRoute($uri, $handler, ['GET']);
+	}
+
+	public function post($uri, $handler)
+	{
+		$this->container->router->addRoute($uri, $handler, ['POST']);
+	}
+
+	public function map($uri, $handler, array $methods = ['GET'])
+	{
+		$this->container->router->addRoute($uri, $handler, $methods);
+	}
+
+	public function run()
+	{
+		$router = $this->container->router;
+
+		$path = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/';
+		$router->setPath($path);
+
+		$response = $router->getResponse();
+		
+		return $this->process($response);
+	}
+
+	protected function process($callable)
+	{
+		return $callable();
+	}
 }
